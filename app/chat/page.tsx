@@ -212,24 +212,24 @@ export default function ChatPage() {
             <div className="bg-surface border border-border rounded-xl p-5 space-y-3 h-[calc(100dvh-320px)] min-h-[300px] max-h-[500px] overflow-y-auto">
               {currentMember && (
                 <div className="lg:hidden flex flex-wrap gap-x-4 gap-y-1 pb-2 border-b border-border mb-1">
-                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                  <div className="flex items-center gap-1.5 text-[0.6rem]">
                     <span className="w-1.5 h-1.5 rounded-full bg-success shrink-0" />
-                    <span className="text-text-muted">P</span>
+                    <span className="text-text-muted">Popularity</span>
                     <span className="text-text-primary font-bold">{currentMember.stats.popularity}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                  <div className="flex items-center gap-1.5 text-[0.6rem]">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                    <span className="text-text-muted">A</span>
+                    <span className="text-text-muted">Affection</span>
                     <span className="text-text-primary font-bold">{currentMember.stats.affection}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                  <div className="flex items-center gap-1.5 text-[0.6rem]">
                     <span className="w-1.5 h-1.5 rounded-full bg-danger shrink-0" />
-                    <span className="text-text-muted">J</span>
+                    <span className="text-text-muted">Jealousy</span>
                     <span className="text-text-primary font-bold">{currentMember.stats.jealousy}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                  <div className="flex items-center gap-1.5 text-[0.6rem]">
                     <span className="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0" />
-                    <span className="text-text-muted">M</span>
+                    <span className="text-text-muted">Mental</span>
                     <span className="text-text-primary font-bold">{currentMember.stats.mental}</span>
                   </div>
                 </div>

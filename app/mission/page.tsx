@@ -39,6 +39,7 @@ export default function MissionPage() {
         memberA.stats = { ...concept.initialStats };
       }
     }
+    saved.chatHistory = [];
     const updated = applyMission(saved, mission);
     saveGame(updated);
     router.push(`/result?mission=${missionId}`);
