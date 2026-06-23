@@ -50,7 +50,7 @@ export default function MemberCard({
       className={`bg-surface border rounded-xl overflow-hidden transition-all duration-150 ${
         isSelectable
           ? "border-primary/50 hover:border-primary cursor-pointer"
-          : "border-border cursor-not-allowed opacity-60 hover:opacity-50"
+          : "border-border cursor-not-allowed opacity-75 hover:opacity-60"
       }`}
       style={isSelectable ? { boxShadow: '0 0 0 1px rgba(242,65,143,0.25), 0 0 24px rgba(242,65,143,0.10)' } : undefined}
       onClick={handleClick}
@@ -74,7 +74,7 @@ export default function MemberCard({
               src={member.imageUrl}
               alt={`${member.name} — ${member.role}`}
               className={`w-full h-full object-cover transition-all duration-150 ${
-                isSelectable ? "brightness-150" : "brightness-100 saturate-[0.7]"
+                !isSelectable ? "brightness-[0.9]" : ""
               }`}
               onError={() => setImgError(true)}
             />
@@ -88,7 +88,9 @@ export default function MemberCard({
             </div>
           </div>
         )}
-        <div className={`absolute inset-0 bg-gradient-to-t ${tone.gradient}`} />
+        {!isSelectable && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-50" />
+        )}
         <div className="absolute top-2 left-2">
           <Badge variant={isSelectable ? "primary" : "muted"}>{member.id}</Badge>
         </div>
