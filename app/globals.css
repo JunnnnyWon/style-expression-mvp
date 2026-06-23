@@ -52,8 +52,8 @@
   --color-focus: #22D3EE;
   --color-overlay: rgba(7, 7, 12, 0.72);
 
-  --font-display: var(--font-space-grotesk), "Pretendard", "Noto Sans KR", sans-serif;
-  --font-body: "Pretendard", "Noto Sans KR", "Inter", sans-serif;
+  --font-display: "Pretendard", "Noto Sans KR", sans-serif;
+  --font-body: "Pretendard", "Noto Sans KR", sans-serif;
 
   --radius-xs: 6px;
   --radius-sm: 10px;
