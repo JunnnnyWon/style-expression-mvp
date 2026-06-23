@@ -13,6 +13,7 @@ export default function MembersPage() {
   const router = useRouter();
   const [members, setMembers] = useState(() => createInitialMembers());
   const [detailMember, setDetailMember] = useState<Member | null>(null);
+  const [showLockedModal, setShowLockedModal] = useState(false);
 
   useEffect(() => {
     const saved = loadGame();
@@ -37,7 +38,9 @@ export default function MembersPage() {
             <MemberCard
               key={member.id}
               member={member}
+              selectable={member.id === "A"}
               onDetail={() => setDetailMember(member)}
+              onLockedClick={() => setShowLockedModal(true)}
             />
           ))}
         </div>
@@ -71,6 +74,23 @@ export default function MembersPage() {
             </div>
           </div>
         )}
+      </Modal>
+
+      <Modal open={showLockedModal} onClose={() => setShowLockedModal(false)} title="개발 중입니다">
+        <div className="space-y-4 text-center">
+          <div className="w-16 h-16 mx-auto rounded-full bg-surface-elevated border border-border flex items-center justify-center">
+            <span className="text-2xl">🔧</span>
+          </div>
+          <p className="text-body-md text-text-secondary">
+            해당 멤버는 현재 개발 중입니다.
+          </p>
+          <p className="text-body-sm text-text-muted">
+            <span className="text-primary font-semibold">작곡 멤버(A)</span>부터 먼저 만나보세요!
+          </p>
+          <Button onClick={() => setShowLockedModal(false)}>
+            확인
+          </Button>
+        </div>
       </Modal>
     </main>
   );

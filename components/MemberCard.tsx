@@ -2,7 +2,7 @@
 
 import { Member } from "@/data/members";
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Info } from "lucide-react";
+import { ChevronDown, ChevronUp, Info, Lock } from "lucide-react";
 import Badge from "./Badge";
 
 const memberTones: Record<string, { gradient: string; accent: string }> = {
@@ -15,23 +15,47 @@ const memberTones: Record<string, { gradient: string; accent: string }> = {
 
 export default function MemberCard({
   member,
+  selectable,
   onDetail,
+  onLockedClick,
 }: {
   member: Member;
+  selectable?: boolean;
   onDetail?: () => void;
+  onLockedClick?: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [imgError, setImgError] = useState(false);
 
   const tone = memberTones[member.id] ?? memberTones.A;
+  const isSelectable = selectable ?? true;
+
+  const handleClick = () => {
+    if (!isSelectable) {
+      onLockedClick?.();
+      return;
+    }
+    setExpanded(!expanded);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick();
+    }
+  };
 
   return (
     <div
-      className="bg-surface border border-border rounded-xl overflow-hidden hover:border-border-strong transition-colors cursor-pointer group"
-      onClick={() => setExpanded(!expanded)}
+      className={`bg-surface border rounded-xl overflow-hidden transition-all duration-150 ${
+        isSelectable
+          ? "border-primary/50 hover:border-primary cursor-pointer shadow-[0_0_0_1px_rgba(242,65,143,0.25),0_0_24px_rgba(242,65,143,0.10)]"
+          : "border-border cursor-not-allowed opacity-60 hover:opacity-50"
+      }`}
+      onClick={handleClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpanded(!expanded); } }}
+      onKeyDown={handleKeyDown}
     >
       <div className="aspect-[3/4] bg-surface-elevated overflow-hidden relative">
         {imgError ? (
@@ -44,21 +68,43 @@ export default function MemberCard({
             </div>
           </div>
         ) : (
-          <img
-            src={member.imageUrl}
-            alt={`${member.name} — ${member.role}`}
-            className="w-full h-full object-cover"
-            onError={() => setImgError(true)}
-          />
+          <>
+            <img
+              src={member.imageUrl}
+              alt={`${member.name} — ${member.role}`}
+              className={`w-full h-full object-cover transition-all duration-150 ${
+                !isSelectable ? "brightness-[0.35] saturate-[0.3]" : ""
+              }`}
+              onError={() => setImgError(true)}
+            />
+            {!isSelectable && (
+              <div className="absolute inset-0 bg-black/40" />
+            )}
+          </>
+        )}
+        {!isSelectable && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <Lock size={28} className="mx-auto text-text-muted mb-1" />
+              <p className="text-label-caps text-text-muted">COMING SOON</p>
+            </div>
+          </div>
         )}
         <div className={`absolute inset-0 bg-gradient-to-t ${tone.gradient}`} />
         <div className="absolute top-2 left-2">
-          <Badge variant="primary">{member.id}</Badge>
+          <Badge variant={isSelectable ? "primary" : "muted"}>{member.id}</Badge>
         </div>
-        {onDetail && (
+        {isSelectable && (
+          <div className="absolute top-2 right-2">
+            <span className="inline-block px-[8px] py-[4px] rounded-full bg-primary/90 text-ink text-[0.6rem] font-bold tracking-[0.08em]">
+              SELECT
+            </span>
+          </div>
+        )}
+        {onDetail && isSelectable && (
           <button
             onClick={(e) => { e.stopPropagation(); onDetail(); }}
-            className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white/70 hover:text-white transition-colors"
+            className="absolute top-10 right-2 p-1.5 rounded-full bg-black/40 text-white/70 hover:text-white transition-colors"
             aria-label="상세 정보"
           >
             <Info size={14} />
@@ -66,25 +112,29 @@ export default function MemberCard({
         )}
         <div className="absolute bottom-3 left-3 right-3 space-y-1">
           <h3 className="text-heading-md text-white drop-shadow-lg">{member.name}</h3>
-          <p className={`text-xs font-medium ${tone.accent} drop-shadow`}>{member.role}</p>
+          <p className={`text-xs font-medium ${isSelectable ? tone.accent : "text-text-muted"} drop-shadow`}>{member.role}</p>
         </div>
       </div>
       <div className="px-3 py-3 space-y-2">
         <div className="flex flex-wrap gap-1">
           {[member.archetype, ...member.visualSummary.split(", ").slice(0, 2)].map((kw, i) => (
-            <span key={i} className="text-[0.65rem] px-2 py-0.5 bg-surface-elevated text-text-muted rounded-full">
+            <span key={i} className={`text-[0.65rem] px-2 py-0.5 rounded-full ${
+              isSelectable ? "bg-surface-elevated text-text-muted" : "bg-surface text-text-muted/50"
+            }`}>
               {kw}
             </span>
           ))}
         </div>
-        {expanded && (
+        {expanded && isSelectable && (
           <div className="pt-2 space-y-2 text-sm text-text-secondary border-t border-border">
             <p>{member.personality}</p>
             <p className="text-warning/80 text-xs">{member.trigger}</p>
           </div>
         )}
         <div className="flex justify-center pt-0.5">
-          {expanded ? <ChevronUp size={14} className="text-text-muted" /> : <ChevronDown size={14} className="text-text-muted" />}
+          {isSelectable ? (
+            expanded ? <ChevronUp size={14} className="text-text-muted" /> : <ChevronDown size={14} className="text-text-muted" />
+          ) : null}
         </div>
       </div>
     </div>
