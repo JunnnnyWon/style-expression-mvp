@@ -34,8 +34,8 @@ function ResultContent() {
     <div className="max-w-3xl mx-auto space-y-8">
       <div className="text-center space-y-2">
         <Badge>RESULT</Badge>
-        <h2 className="text-[2rem] font-extrabold tracking-[-0.03em]">{mission.title}</h2>
-        <p className="text-text-secondary text-sm">선택의 후폭풍이 대기실을 감쌌다</p>
+        <h2 className="text-heading-xl">{mission.title}</h2>
+        <p className="text-body-sm text-text-secondary">선택의 후폭풍이 대기실을 감쌌다</p>
       </div>
 
       <div className="aspect-video bg-surface-elevated border border-border rounded-xl overflow-hidden">
@@ -48,7 +48,7 @@ function ResultContent() {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-soft to-surface">
-            <p className="text-text-muted text-sm">포스터 로딩 실패</p>
+            <p className="text-body-sm text-text-muted">포스터 로딩 실패</p>
           </div>
         )}
       </div>

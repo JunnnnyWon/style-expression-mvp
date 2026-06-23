@@ -58,7 +58,7 @@ export default function MissionCard({
         )}
       </div>
       <div className="p-5 space-y-3">
-        <h3 className="text-lg font-bold text-text-primary">{mission.title}</h3>
+        <h3 className="text-heading-md text-text-primary">{mission.title}</h3>
         <p className="text-sm text-text-secondary">{mission.description}</p>
         <div className="flex flex-wrap gap-1 text-xs">
           {mission.visualKeyword.split(", ").map((kw, i) => (

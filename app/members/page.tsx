@@ -28,8 +28,8 @@ export default function MembersPage() {
       <div className="max-w-[1200px] mx-auto space-y-8">
         <div className="text-center space-y-2">
           <Badge>MEMBER PROFILE</Badge>
-          <h2 className="text-[2rem] font-extrabold tracking-[-0.03em]">Dopamine Diva</h2>
-          <p className="text-text-secondary">5인 멤버를 소개합니다</p>
+          <h2 className="text-heading-xl">Dopamine Diva</h2>
+          <p className="text-body-md text-text-secondary">5인 멤버를 소개합니다</p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -60,13 +60,13 @@ export default function MembersPage() {
               <Badge>{detailMember.role}</Badge>
               <Badge variant="muted">{detailMember.archetype}</Badge>
             </div>
-            <p className="text-text-secondary leading-relaxed">{detailMember.personality}</p>
+            <p className="text-body-md text-text-secondary">{detailMember.personality}</p>
             <div className="bg-surface-elevated rounded-lg p-3">
-              <p className="text-xs text-warning/80 font-medium">{detailMember.trigger}</p>
+              <p className="text-body-sm text-warning/80">{detailMember.trigger}</p>
             </div>
             <div className="flex flex-wrap gap-1">
               {detailMember.visualSummary.split(", ").map((kw, i) => (
-                <span key={i} className="text-xs px-2 py-0.5 bg-surface-soft text-text-muted rounded-full">{kw}</span>
+                <span key={i} className="text-body-sm px-2 py-0.5 bg-surface-soft text-text-muted rounded-full">{kw}</span>
               ))}
             </div>
           </div>

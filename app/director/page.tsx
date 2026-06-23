@@ -39,24 +39,24 @@ export default function DirectorPage() {
       <div className="max-w-xl text-center space-y-8">
         <div className="space-y-4">
           <Badge>DIRECTOR BRIEFING</Badge>
-          <h2 className="text-[2rem] font-extrabold tracking-[-0.03em]">당신은 총괄 비주얼 디렉터입니다</h2>
+          <h2 className="text-heading-xl">당신은 총괄 비주얼 디렉터입니다</h2>
         </div>
 
         <div className="bg-surface border border-border rounded-xl p-8 space-y-4 text-left">
-          <p className="text-text-secondary leading-relaxed">
+          <p className="text-body-md text-text-secondary">
             <span className="text-primary font-semibold">Dopamine Diva</span>는
             데뷔 2년차, 아직 확실한 히트곡이 없다.
           </p>
-          <p className="text-text-secondary leading-relaxed">
+          <p className="text-body-md text-text-secondary">
             기획사는 마지막 기회를 걸었다. 망하기 직전의 프로젝트.
             당신은 새로 투입된 <span className="text-primary font-semibold">총괄 비주얼 디렉터</span>다.
           </p>
-          <p className="text-text-secondary leading-relaxed">
+          <p className="text-body-md text-text-secondary">
             이번 컴백의 콘셉트와 스타일링을 총괄하고,
             멤버들의 감정과 관계성을 관리해야 한다.
           </p>
           <div className="bg-surface-elevated rounded-xl p-4 mt-4">
-            <p className="text-sm text-text-muted">
+            <p className="text-body-sm text-text-muted">
               인기 · 애정 · 질투 · 멘탈 — 모든 스탯은 당신의 선택에 반응한다.
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function DirectorPage() {
 
       <Modal open={showNameModal} onClose={handleSkip} title="멤버 A의 이름을 정해주세요">
         <div className="space-y-4">
-          <p className="text-sm text-text-secondary">
+          <p className="text-body-sm text-text-secondary">
             작곡 멤버의 이름을 직접 지어주세요.
           </p>
           <input
@@ -85,7 +85,7 @@ export default function DirectorPage() {
             onChange={e => setMemberAName(e.target.value)}
             placeholder="이름을 입력하세요..."
             maxLength={10}
-            className="w-full h-12 px-4 bg-surface-elevated border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-focus text-center text-lg"
+            className="w-full h-12 px-4 bg-surface-elevated border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-focus text-center text-heading-md"
             autoFocus
             onKeyDown={e => e.key === "Enter" && handleConfirmName()}
           />

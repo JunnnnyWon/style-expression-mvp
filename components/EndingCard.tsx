@@ -31,12 +31,12 @@ export default function EndingCard({ ending }: { ending: Ending }) {
         {imgError && <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient}`} />}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         <div className="absolute top-4 left-4">
-          <span className="inline-block px-[10px] py-[6px] rounded-full bg-surface-soft text-primary-hover text-[0.75rem] font-bold tracking-[0.08em]">
+          <span className="inline-block px-[10px] py-[6px] rounded-full bg-surface-soft text-primary-hover text-label-caps">
             {theme.label}
           </span>
         </div>
         <div className="absolute bottom-6 left-6 right-6 space-y-2">
-          <h3 className="text-3xl font-display font-extrabold tracking-[-0.04em] text-white drop-shadow-lg">
+          <h3 className="text-display-lg text-white drop-shadow-lg">
             {ending.title}
           </h3>
           <p className="text-sm text-text-secondary">{ending.tone}</p>

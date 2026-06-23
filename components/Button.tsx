@@ -23,7 +23,7 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        "h-12 rounded-full px-[22px] text-center font-bold text-sm tracking-[-0.005em] transition-all duration-150 focus-visible:outline-2 focus-visible:outline-focus focus-visible:outline-offset-2 disabled:cursor-not-allowed",
+        "h-12 rounded-full px-[22px] text-center text-label-md transition-all duration-150 focus-visible:outline-2 focus-visible:outline-focus focus-visible:outline-offset-2 disabled:cursor-not-allowed",
         variant === "primary" && "bg-primary text-ink hover:bg-primary-hover disabled:bg-surface-soft disabled:text-text-muted",
         variant === "secondary" && "bg-surface-elevated text-text-primary border border-border hover:border-border-strong disabled:opacity-50",
         className,

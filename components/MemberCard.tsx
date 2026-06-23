@@ -65,7 +65,7 @@ export default function MemberCard({
           </button>
         )}
         <div className="absolute bottom-3 left-3 right-3 space-y-1">
-          <h3 className="text-lg font-bold text-white drop-shadow-lg">{member.name}</h3>
+          <h3 className="text-heading-md text-white drop-shadow-lg">{member.name}</h3>
           <p className={`text-xs font-medium ${tone.accent} drop-shadow`}>{member.role}</p>
         </div>
       </div>

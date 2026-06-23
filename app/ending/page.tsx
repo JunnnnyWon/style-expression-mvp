@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadGame, resetGame } from "@/lib/gameStorage";
+import { loadGame, saveGame, resetGame } from "@/lib/gameStorage";
 import { calculateEnding } from "@/lib/calculateEnding";
 import { endings } from "@/data/endings";
 import { GameState, Ending } from "@/data/members";
@@ -23,9 +23,7 @@ export default function EndingPage() {
     const found = endings.find(e => e.id === endingId);
     if (found) setEnding(found);
     saved.endingId = endingId;
-    if (typeof window !== "undefined") {
-      localStorage.setItem("style-expression-mvp-state", JSON.stringify(saved));
-    }
+    saveGame(saved);
   }, [router]);
 
   const handleReset = () => {
@@ -41,7 +39,7 @@ export default function EndingPage() {
         <EndingCard ending={ending} />
 
         <div className="bg-surface/40 border border-border rounded-xl p-6 text-center space-y-3">
-          <p className="text-sm text-text-muted">
+          <p className="text-body-sm text-text-muted">
             스타일링 선택이 만든 당신만의 이야기입니다.
             <br />
             다른 선택으로 또 다른 엔딩을 경험해보세요.

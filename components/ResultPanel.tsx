@@ -61,7 +61,7 @@ export default function ResultPanel({
             <div key={member.id} className="bg-surface border border-border rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-sm text-text-primary">{member.name}</span>
+                  <span className="text-label-md text-text-primary">{member.name}</span>
                   <span className="text-xs text-text-muted">{member.role}</span>
                 </div>
                 <div className="flex gap-2 text-xs">

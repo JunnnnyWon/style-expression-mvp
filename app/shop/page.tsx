@@ -33,8 +33,8 @@ export default function ShopPage() {
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <Badge>STYLE SHOP</Badge>
-          <h2 className="text-[2rem] font-extrabold tracking-[-0.03em]">확장 가능한 BM</h2>
-          <p className="text-text-secondary">출시 준비 중</p>
+          <h2 className="text-heading-xl">확장 가능한 BM</h2>
+          <p className="text-body-md text-text-secondary">출시 준비 중</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -45,19 +45,19 @@ export default function ShopPage() {
             >
               <div className="text-4xl">{item.emoji}</div>
               <div className="space-y-2">
-                <h3 className="font-bold text-text-primary">{item.title}</h3>
-                <p className="text-sm text-text-secondary">{item.description}</p>
+                <h3 className="text-heading-md text-text-primary">{item.title}</h3>
+                <p className="text-body-sm text-text-secondary">{item.description}</p>
               </div>
               <div className="flex items-center justify-between pt-2 border-t border-border">
-                <span className="text-lg font-bold text-primary">{item.price}</span>
-                <span className="text-xs px-3 py-1 bg-surface-soft text-text-muted rounded-full">준비 중</span>
+                <span className="text-heading-md text-primary">{item.price}</span>
+                <span className="text-label-caps px-3 py-1 bg-surface-soft text-text-muted rounded-full">준비 중</span>
               </div>
             </div>
           ))}
         </div>
 
         <div className="bg-surface/40 border border-border rounded-xl p-6 text-center">
-          <p className="text-sm text-text-muted">
+          <p className="text-body-sm text-text-muted">
             * 본 화면은 BM 확장 가능성을 보여주기 위한 목업입니다. 실제 결제 기능은 포함되어 있지 않습니다.
           </p>
         </div>

@@ -38,10 +38,10 @@ export default function MissionPage() {
       <div className="max-w-[1200px] mx-auto space-y-8">
         <div className="text-center space-y-2">
           <Badge>MISSION 01</Badge>
-          <h2 className="text-[2.5rem] font-display font-extrabold leading-[1.05] tracking-[-0.04em]">
+          <h2 className="text-display-lg">
             첫 컴백 무대 콘셉트를 결정하세요
           </h2>
-          <p className="text-text-secondary">선택이 서사를 바꿉니다</p>
+          <p className="text-body-md text-text-secondary">선택이 서사를 바꿉니다</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
