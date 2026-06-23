@@ -24,12 +24,12 @@ export default function LandingPage() {
             </span>
           </div>
           <div className="space-y-4">
-            <h1 className="text-display-xl">
-              Style<br />Expression
-            </h1>
-            <p className="text-body-lg text-text-secondary">
-              Directing: Dopamine Diva
-            </p>
+<h1 className="text-display-xl">
+  Directing:<br />Dopamine Diva
+</h1>
+<p className="text-body-lg text-text-secondary">
+  Style Expression
+</p>
           </div>
 
           <div className="bg-surface border border-border rounded-xl p-6 max-w-md mx-auto lg:mx-0">

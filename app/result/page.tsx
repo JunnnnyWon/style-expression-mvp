@@ -38,16 +38,16 @@ function ResultContent() {
         <p className="text-body-sm text-text-secondary">선택의 후폭풍이 대기실을 감쌌다</p>
       </div>
 
-      <div className="aspect-video bg-surface-elevated border border-border rounded-xl overflow-hidden">
+      <div className="bg-surface-elevated border border-border rounded-xl overflow-hidden flex items-center justify-center" style={{ maxHeight: '500px' }}>
         {!posterError ? (
           <img
             src={mission.posterUrl}
             alt={`${mission.title} 콘셉트 포스터`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain max-h-[500px]"
             onError={() => setPosterError(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-soft to-surface">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-soft to-surface" style={{ minHeight: '300px' }}>
             <p className="text-body-sm text-text-muted">포스터 로딩 실패</p>
           </div>
         )}

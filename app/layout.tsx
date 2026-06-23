@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Style Expression | Directing: Dopamine Diva",
+  title: "Directing: Dopamine Diva",
   description: "AI 기반 아이돌 스타일링 디렉팅 및 멀티 엔딩 시뮬레이션 게임",
 };
 

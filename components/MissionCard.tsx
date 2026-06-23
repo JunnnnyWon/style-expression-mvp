@@ -31,7 +31,7 @@ export default function MissionCard({
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(mission.id); } }}
     >
-      <div className="aspect-video bg-surface-elevated overflow-hidden relative">
+      <div className="aspect-[9/16] bg-surface-elevated overflow-hidden relative">
         {!imgError ? (
           <img
             src={mission.posterUrl}
