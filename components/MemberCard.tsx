@@ -74,7 +74,7 @@ export default function MemberCard({
               src={member.imageUrl}
               alt={`${member.name} — ${member.role}`}
               className={`w-full h-full object-cover transition-all duration-150 ${
-                isSelectable ? "brightness-110" : "brightness-[0.6] saturate-[0.5]"
+                isSelectable ? "brightness-150" : "brightness-100 saturate-[0.7]"
               }`}
               onError={() => setImgError(true)}
             />
