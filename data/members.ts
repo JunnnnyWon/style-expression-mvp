@@ -55,6 +55,7 @@ export interface GameState {
   group: { fame: number; scandalRisk: number };
   chatHistory: ChatMessage[];
   endingId: string | null;
+  extraChats?: number;
 }
 
 export function createInitialMembers(): Member[] {
@@ -62,11 +63,11 @@ export function createInitialMembers(): Member[] {
     {
       id: "A",
       name: "(이름 미정)",
-      role: "작곡 멤버",
+      role: "작곡 / 프로듀싱 / 서브보컬",
       archetype: "예민한 작업실 캐릭터",
-      visualSummary: "차분한 분위기, 뿔테 안경, 오버사이즈 니트",
-      personality: "감성적이고 예민하다. 음악과 감정을 중요시한다. 디렉터의 관심을 갈망한다.",
-      trigger: "감성과 음악이 무시되면 멘탈 하락",
+      visualSummary: "다크 브라운 섀도우 펌, 눈을 살짝 가리는 앞머리, 오버사이즈 니트",
+      personality: "예민하고 나른해 보이지만, 디렉터의 한마디에 가장 크게 흔들린다. 겉으로는 무심하고 피곤해 보이지만 실제로는 인정받고 싶어 한다. 자신의 음악과 감성이 무시당하는 것에 민감하다. 칭찬에는 약하지만 티를 내지 않으려 한다. 다른 멤버에게 시선이 쏠리면 소외감을 느낀다. 디렉터가 자신의 음악과 존재감을 알아봐주면 빠르게 신뢰한다.",
+      trigger: "무시당하거나 비교되면 질투와 불안이 폭발한다. 칭찬과 인정에 크게 흔들린다.",
       imageUrl: "/characters/member-a-default.webp",
       stats: { popularity: 40, affection: 50, jealousy: 30, mental: 60 },
     },
@@ -123,4 +124,5 @@ export const INITIAL_GAME_STATE: GameState = {
   group: { fame: 40, scandalRisk: 20 },
   chatHistory: [],
   endingId: null,
+  extraChats: 0,
 };

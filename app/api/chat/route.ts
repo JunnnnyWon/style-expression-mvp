@@ -1,85 +1,70 @@
 import { NextRequest, NextResponse } from "next/server";
-import { SYSTEM_PROMPT, MEMBER_PROMPTS, FALLBACK_RESPONSES } from "@/lib/prompts";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { buildChatPrompt } from "@/lib/buildChatPrompt";
+import { clampStatDelta, applyStatDelta } from "@/lib/applyStatDelta";
+import { concepts } from "@/data/concepts";
+import { dohaFallbackReplies } from "@/data/doha";
 
 export async function POST(request: NextRequest) {
   let body: any;
   try {
     body = await request.json();
-    const { memberId, userMessage, selectedMissionId, currentStats, chatHistory } = body;
+    const { memberId, userMessage, selectedMissionId, currentStats, chatHistory, characterName } = body;
 
     if (!memberId || !userMessage) {
-      return NextResponse.json({ reply: getFallback(memberId ?? "A") }, { status: 200 });
+      const fallback = dohaFallbackReplies.neutral;
+      return NextResponse.json({ reply: fallback.reply, emotion: fallback.emotion, statDelta: fallback.statDelta, endingHint: fallback.endingHint }, { status: 200 });
     }
 
-    const memberPrompt = MEMBER_PROMPTS[memberId] ?? MEMBER_PROMPTS["A"];
-    const statsText = `현재 스탯 — 인기: ${currentStats.popularity}, 애정: ${currentStats.affection}, 질투: ${currentStats.jealousy}, 멘탈: ${currentStats.mental}`;
-    const missionText = `선택한 콘셉트: ${selectedMissionId ?? "없음"}`;
-
-    const apiKey = process.env.OPENAI_API_KEY;
-
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ reply: getFallback(memberId) }, { status: 200 });
+      const fallback = dohaFallbackReplies.neutral;
+      return NextResponse.json({ reply: fallback.reply, emotion: fallback.emotion, statDelta: fallback.statDelta, endingHint: fallback.endingHint }, { status: 200 });
     }
 
-    const messages = [
-      { role: "system", content: `${SYSTEM_PROMPT}\n\n${memberPrompt}\n\n${statsText}\n${missionText}` },
-      ...(chatHistory ?? []).slice(-6).map((c: { role: string; message: string }) => ({
-        role: c.role,
-        content: c.message,
-      })),
-      { role: "user", content: userMessage },
-    ];
+    const conceptId = selectedMissionId ?? "soft-savior";
+    const prompt = buildChatPrompt(characterName ?? "멤버 A", conceptId, currentStats);
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages,
-        max_tokens: 200,
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-3.1-flash-lite",
+      generationConfig: {
+        maxOutputTokens: 300,
         temperature: 0.8,
-      }),
-      signal: AbortSignal.timeout(10000),
+      },
     });
 
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.status}`);
-    }
+    const history = (chatHistory ?? []).slice(-6).map((c: { role: string; message: string }) => ({
+      role: c.role === "assistant" ? "model" as const : "user" as const,
+      parts: [{ text: c.message }],
+    }));
 
-    const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content?.trim();
-
-    if (!reply) {
-      throw new Error("Empty response from OpenAI");
-    }
-
-    return NextResponse.json({
-      reply,
-      emotion: detectEmotion(reply),
-      statDelta: { affection: 1, jealousy: 1 },
+    const chat = model.startChat({
+      history: [{ role: "user" as const, parts: [{ text: prompt }] }, ...history],
     });
+
+    const result = await chat.sendMessage(userMessage);
+    const raw = result.response.text();
+
+    let parsed: any;
+    try {
+      const cleaned = raw.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
+      parsed = JSON.parse(cleaned);
+    } catch {
+      const fallback = dohaFallbackReplies.neutral;
+      return NextResponse.json({ reply: fallback.reply, emotion: fallback.emotion, statDelta: fallback.statDelta, endingHint: fallback.endingHint }, { status: 200 });
+    }
+
+    const reply = typeof parsed.reply === "string" ? parsed.reply : dohaFallbackReplies.neutral.reply;
+    const emotion = typeof parsed.emotion === "string" ? parsed.emotion : "neutral";
+    const rawDelta = parsed.statDelta ?? {};
+    const statDelta = clampStatDelta(rawDelta);
+    const endingHint = typeof parsed.endingHint === "string" ? parsed.endingHint : "none";
+
+    return NextResponse.json({ reply, emotion, statDelta, endingHint });
   } catch (error) {
     console.error("Chat API error:", error);
-    const memberId = body?.memberId ?? "A";
-    return NextResponse.json({
-      reply: getFallback(memberId),
-      emotion: "neutral",
-      statDelta: {},
-    });
+    const fallback = dohaFallbackReplies.neutral;
+    return NextResponse.json({ reply: fallback.reply, emotion: fallback.emotion, statDelta: fallback.statDelta, endingHint: fallback.endingHint }, { status: 200 });
   }
-}
-
-function getFallback(memberId: string): string {
-  const fallbacks = FALLBACK_RESPONSES[memberId] ?? FALLBACK_RESPONSES["A"];
-  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
-}
-
-function detectEmotion(text: string): string {
-  if (text.includes("질투") || text.includes("웃기") || text.includes("비교")) return "jealous";
-  if (text.includes("좋아") || text.includes("마음") || text.includes("감사")) return "happy";
-  if (text.includes("속상") || text.includes("외로") || text.includes("슬프")) return "sad";
-  return "neutral";
 }

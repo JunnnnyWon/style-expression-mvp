@@ -36,5 +36,6 @@ export function getFreshState(): GameState {
     group: { ...INITIAL_GAME_STATE.group },
     chatHistory: [],
     endingId: null,
+    extraChats: 0,
   };
 }
