@@ -63,8 +63,10 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="flex-1 w-full max-w-md lg:max-w-none">
-          <div className="aspect-[16/9] bg-surface-elevated border border-border rounded-xl overflow-hidden">
+        <div className="flex-1 w-full max-w-md lg:max-w-none relative">
+          <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(242,65,143,0.18),transparent_60%)] pointer-events-none" />
+          <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.08),transparent_50%)] pointer-events-none" />
+          <div className="relative aspect-[16/9] rounded-xl overflow-hidden shadow-[0_0_48px_rgba(242,65,143,0.28),0_0_80px_rgba(242,65,143,0.12)]">
             {!posterError ? (
               <img
                 src="/posters/main-poster.webp"
@@ -77,6 +79,7 @@ export default function LandingPage() {
                 <p className="text-body-sm text-text-muted">포스터 로딩 실패</p>
               </div>
             )}
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
