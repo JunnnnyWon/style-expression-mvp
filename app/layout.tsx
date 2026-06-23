@@ -12,6 +12,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Directing: Dopamine Diva",
   description: "AI 기반 아이돌 스타일링 디렉팅 및 멀티 엔딩 시뮬레이션 게임",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
