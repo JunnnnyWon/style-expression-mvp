@@ -23,9 +23,10 @@ export default function MissionCard({
     <div
       className={`bg-surface border rounded-xl overflow-hidden transition-all duration-150 cursor-pointer group ${
         selected
-          ? "border-primary shadow-[0_0_0_1px_rgba(242,65,143,0.55),0_0_36px_rgba(242,65,143,0.18)]"
+          ? "border-primary"
           : "border-border hover:border-border-strong hover:-translate-y-1"
       }`}
+      style={selected ? { boxShadow: '0 0 0 1px rgba(242,65,143,0.55), 0 0 36px rgba(242,65,143,0.18)' } : undefined}
       onClick={() => onSelect(mission.id)}
       role="button"
       tabIndex={0}

@@ -64,9 +64,17 @@ export default function LandingPage() {
         </div>
 
         <div className="flex-1 w-full max-w-md lg:max-w-none relative">
-          <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(242,65,143,0.18),transparent_60%)] pointer-events-none" />
-          <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.08),transparent_50%)] pointer-events-none" />
-          <div className="relative aspect-[16/9] rounded-xl overflow-hidden shadow-[0_0_48px_rgba(242,65,143,0.28),0_0_80px_rgba(242,65,143,0.12)]">
+          <div
+            className="absolute -inset-8 pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at center, rgba(242,65,143,0.18), transparent 60%)' }}
+          />
+          <div
+            className="absolute -inset-8 pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at center, rgba(34,211,238,0.08), transparent 50%)' }}
+          />
+          <div
+            className="relative aspect-[16/9] rounded-xl overflow-hidden"
+            style={{ boxShadow: '0 0 48px rgba(242,65,143,0.28), 0 0 80px rgba(242,65,143,0.12)' }}>
             {!posterError ? (
               <img
                 src="/posters/main-poster.webp"

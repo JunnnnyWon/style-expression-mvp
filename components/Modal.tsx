@@ -36,7 +36,7 @@ export default function Modal({
       className="fixed inset-0 z-50 flex items-center justify-center bg-overlay px-4"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="w-full max-w-[720px] bg-surface-elevated rounded-xl p-6 space-y-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
+      <div className="w-full max-w-[720px] bg-surface-elevated rounded-xl p-6 space-y-5" style={{ boxShadow: '0 18px 60px rgba(0,0,0,0.35)' }}>
         <div className="flex items-center justify-between">
           {title && (
             <h3 className="text-lg font-bold text-text-primary">{title}</h3>

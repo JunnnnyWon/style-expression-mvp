@@ -49,9 +49,10 @@ export default function MemberCard({
     <div
       className={`bg-surface border rounded-xl overflow-hidden transition-all duration-150 ${
         isSelectable
-          ? "border-primary/50 hover:border-primary cursor-pointer shadow-[0_0_0_1px_rgba(242,65,143,0.25),0_0_24px_rgba(242,65,143,0.10)]"
+          ? "border-primary/50 hover:border-primary cursor-pointer"
           : "border-border cursor-not-allowed opacity-60 hover:opacity-50"
       }`}
+      style={isSelectable ? { boxShadow: '0 0 0 1px rgba(242,65,143,0.25), 0 0 24px rgba(242,65,143,0.10)' } : undefined}
       onClick={handleClick}
       role="button"
       tabIndex={0}
