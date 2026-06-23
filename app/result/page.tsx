@@ -55,7 +55,7 @@ function ResultContent() {
 
       <ResultPanel gameState={gameState} mission={mission} />
 
-      <div className="flex justify-center gap-4 pt-4">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-3 pt-4">
         <Button onClick={() => router.push("/chat")}>
           대기실 AI 채팅 열기
         </Button>

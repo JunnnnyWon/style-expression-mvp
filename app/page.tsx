@@ -19,7 +19,7 @@ export default function LandingPage() {
   const navigate = (path: string) => {
     if (isExiting) return;
     setIsExiting(path);
-    setTimeout(() => router.push(path), 1500);
+    setTimeout(() => router.push(path), 800);
   };
 
   return (
@@ -32,7 +32,7 @@ export default function LandingPage() {
           style={{
             filter: isExiting ? "blur(0px)" : "blur(20px)",
             transform: isExiting ? "scale(1)" : "scale(1.1)",
-            transition: "all 1.5s ease-in-out",
+            transition: "opacity 1.5s ease-in-out, filter 1.5s ease-in-out, transform 1.5s ease-in-out",
           }}
           onError={() => setImgError(true)}
         />

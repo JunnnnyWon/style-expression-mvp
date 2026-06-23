@@ -100,7 +100,7 @@ export default function EndingPage() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 pt-4">
           <Button onClick={handleReset}>
             다시 플레이하기
           </Button>

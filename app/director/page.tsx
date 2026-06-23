@@ -85,7 +85,7 @@ export default function DirectorPage() {
             onChange={e => setMemberAName(e.target.value)}
             placeholder="이름을 입력하세요..."
             maxLength={10}
-            className="w-full h-12 px-4 bg-surface-elevated border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-focus text-center text-heading-md"
+            className="w-full h-12 px-4 bg-surface-elevated border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-focus text-center text-body-md"
             autoFocus
             onKeyDown={e => e.key === "Enter" && handleConfirmName()}
           />

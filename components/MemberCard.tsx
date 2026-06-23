@@ -104,10 +104,10 @@ export default function MemberCard({
         {onDetail && isSelectable && (
           <button
             onClick={(e) => { e.stopPropagation(); onDetail(); }}
-            className="absolute top-10 right-2 p-1.5 rounded-full bg-black/40 text-white/70 hover:text-white transition-colors"
+            className="absolute top-12 right-2 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-black/40 text-white/70 hover:text-white transition-colors"
             aria-label="상세 정보"
           >
-            <Info size={14} />
+            <Info size={18} />
           </button>
         )}
         <div className="absolute bottom-3 left-3 right-3 space-y-1">
@@ -118,7 +118,7 @@ export default function MemberCard({
       <div className="px-3 py-3 space-y-2">
         <div className="flex flex-wrap gap-1">
           {[member.archetype, ...member.visualSummary.split(", ").slice(0, 2)].map((kw, i) => (
-            <span key={i} className={`text-[0.65rem] px-2 py-0.5 rounded-full ${
+            <span key={i} className={`text-xs px-2 py-0.5 rounded-full ${
               isSelectable ? "bg-surface-elevated text-text-muted" : "bg-surface text-text-muted/50"
             }`}>
               {kw}

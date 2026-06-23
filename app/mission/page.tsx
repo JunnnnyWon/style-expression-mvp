@@ -88,13 +88,13 @@ export default function MissionPage() {
               
               {/* Bottom text overlays */}
               <div className="absolute inset-x-0 bottom-0 p-5 space-y-1">
-                <span className="text-[10px] font-extrabold text-primary tracking-widest block uppercase">
+                <span className="text-xs font-extrabold text-primary tracking-widest block uppercase">
                   Concept 0{idx + 1}
                 </span>
                 <h3 className="text-heading-md text-text-primary group-hover:text-primary-hover transition-colors leading-tight">
                   {mission.title}
                 </h3>
-                <p className="text-[11px] text-text-muted line-clamp-1">
+                <p className="text-xs text-text-muted line-clamp-1">
                   {mission.description}
                 </p>
               </div>
@@ -112,7 +112,7 @@ export default function MissionPage() {
         >
           <div className="flex flex-col md:flex-row gap-6 text-left">
             {/* Left: Poster preview inside modal */}
-            <div className="w-full md:w-[200px] shrink-0 aspect-[9/16] rounded-xl overflow-hidden border border-border bg-black/40 shadow-inner">
+            <div className="w-full md:w-[200px] shrink-0 aspect-[9/16] max-md:max-h-[300px] rounded-xl overflow-hidden border border-border bg-black/40 shadow-inner">
               <img
                 src={selectedMission.posterUrl}
                 alt={selectedMission.title}

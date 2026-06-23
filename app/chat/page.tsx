@@ -25,11 +25,11 @@ export default function ChatPage() {
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [extraChats, setExtraChats] = useState(0);
   const [openingShown, setOpeningShown] = useState(false);
+  const [conceptId, setConceptId] = useState("soft-savior");
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const MEMBER_ID = "A";
   const currentMember = members.find(m => m.id === MEMBER_ID);
-  const conceptId = gameState?.selectedMissionId ?? "soft-savior";
   const concept = concepts[conceptId];
 
   // Load game & show opening message once
@@ -43,6 +43,7 @@ export default function ChatPage() {
     setMembers(saved.members);
     setChatHistory(saved.chatHistory);
     setExtraChats(saved.extraChats ?? 0);
+    setConceptId(saved.selectedMissionId ?? "soft-savior");
 
     // Auto-show opening message on first entry
     if (saved.chatHistory.length === 0) {
@@ -196,14 +197,43 @@ export default function ChatPage() {
                 <div className="w-10 h-10 rounded-full bg-surface-elevated border border-border overflow-hidden shrink-0 flex items-center justify-center text-body-sm font-bold text-text-muted">
                   <img src={currentMember.imageUrl} alt={currentMember.name} className="w-full h-full object-cover" />
                 </div>
-                <div>
+                <div className="flex items-center gap-2 flex-wrap">
                   <p className="text-label-md text-text-primary">{currentMember.name}</p>
-                  <p className="text-body-sm text-text-muted">{currentMember.role}</p>
+                  <p className="text-body-sm text-text-muted hidden sm:inline">{currentMember.role}</p>
+                  {concept && (
+                    <span className="text-[0.6rem] px-2 py-0.5 rounded-full bg-surface-soft text-primary-hover tracking-[0.08em] font-bold lg:hidden">
+                      {concept.label}
+                    </span>
+                  )}
                 </div>
               </div>
             )}
 
-            <div className="bg-surface border border-border rounded-xl p-5 space-y-4 h-[400px] overflow-y-auto">
+            <div className="bg-surface border border-border rounded-xl p-5 space-y-3 h-[calc(100dvh-320px)] min-h-[300px] max-h-[500px] overflow-y-auto">
+              {currentMember && (
+                <div className="lg:hidden flex flex-wrap gap-x-4 gap-y-1 pb-2 border-b border-border mb-1">
+                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-success shrink-0" />
+                    <span className="text-text-muted">P</span>
+                    <span className="text-text-primary font-bold">{currentMember.stats.popularity}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    <span className="text-text-muted">A</span>
+                    <span className="text-text-primary font-bold">{currentMember.stats.affection}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-danger shrink-0" />
+                    <span className="text-text-muted">J</span>
+                    <span className="text-text-primary font-bold">{currentMember.stats.jealousy}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[0.65rem]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0" />
+                    <span className="text-text-muted">M</span>
+                    <span className="text-text-primary font-bold">{currentMember.stats.mental}</span>
+                  </div>
+                </div>
+              )}
               {chatHistory.length === 0 && !openingShown ? (
                 <div className="h-full flex flex-col items-center justify-center text-text-muted space-y-3">
                   <p className="text-body-sm">아래 질문을 선택하거나 메시지를 입력하세요</p>
@@ -212,7 +242,7 @@ export default function ChatPage() {
                       <button
                         key={i}
                         onClick={() => handleSend(q)}
-                        className="px-3 py-1.5 text-body-sm bg-surface-elevated text-text-muted rounded-full hover:bg-surface-soft transition"
+                        className="px-3 py-2.5 min-h-[44px] text-body-sm bg-surface-elevated text-text-muted rounded-full hover:bg-surface-soft transition"
                         disabled={isForced}
                       >
                         {q}
@@ -273,7 +303,7 @@ export default function ChatPage() {
                       <button
                         key={i}
                         onClick={() => handleSend(q)}
-                        className="px-3 py-1.5 text-xs bg-surface-elevated text-text-muted rounded-full hover:bg-surface-soft transition"
+                        className="px-3 py-2.5 min-h-[44px] text-xs bg-surface-elevated text-text-muted rounded-full hover:bg-surface-soft transition"
                       >
                         {q}
                       </button>
@@ -299,7 +329,7 @@ export default function ChatPage() {
                 {getEndingButtonText()}
               </Button>
               {getEndingHint() && (
-                <p className="text-[0.65rem] text-text-muted">{getEndingHint()}</p>
+                <p className="text-xs text-text-muted">{getEndingHint()}</p>
               )}
             </div>
           </div>

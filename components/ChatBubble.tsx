@@ -24,7 +24,7 @@ export default function ChatBubble({
       <div className="flex justify-end gap-2 items-end">
         <div className="flex flex-col items-end gap-0.5 max-w-[70%]">
           {isFirst && senderName && (
-            <span className="text-[0.65rem] text-text-muted px-1">{senderName}</span>
+            <span className="text-xs text-text-muted px-1">{senderName}</span>
           )}
           <div className="relative">
             <div className="px-4 py-3 text-sm leading-relaxed bg-primary text-ink rounded-xl rounded-br-sm">
@@ -57,7 +57,7 @@ export default function ChatBubble({
       )}
       <div className="flex flex-col items-start gap-0.5 max-w-[70%]">
         {isFirst && senderName && (
-          <span className="text-[0.65rem] text-text-muted px-1">{senderName}</span>
+          <span className="text-xs text-text-muted px-1">{senderName}</span>
         )}
         <div className="relative">
           <div className="px-4 py-3 text-sm leading-relaxed bg-surface-elevated text-text-primary rounded-xl rounded-bl-sm">

@@ -79,7 +79,7 @@ export default function ResultPanel({
               </div>
               {reaction && (
                 <div className="border-t border-border pt-2">
-                  <span className="text-[0.65rem] font-bold tracking-[0.08em] text-text-muted uppercase">Backstage Reaction</span>
+                  <span className="text-xs font-bold tracking-[0.08em] text-text-muted uppercase">Backstage Reaction</span>
                   <p className="text-xs text-text-secondary mt-1">{reaction}</p>
                 </div>
               )}
