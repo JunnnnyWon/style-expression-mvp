@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@import "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css";
+@import "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap";
+
+@theme {
+  --color-background: #07070C;
+  --color-backdrop: #0D0B16;
+  --color-surface: #11111B;
+  --color-surface-elevated: #191926;
+  --color-surface-soft: #211B2F;
+  --color-card-gradient-start: #181326;
+  --color-card-gradient-end: #0B0A12;
+  --color-primary: #F2418F;
+  --color-primary-hover: #FF69A8;
+  --color-secondary: #8B5CF6;
+  --color-tertiary: #22D3EE;
+  --color-success: #7CF7B5;
+  --color-warning: #FBBF24;
+  --color-danger: #FF4D6D;
+  --color-text-primary: #F7F3FF;
+  --color-text-secondary: #B8B4C7;
+  --color-text-muted: #858097;
+  --color-ink: #0B0710;
+  --color-border: #2A293A;
+  --color-border-strong: #3C3654;
+  --color-focus: #22D3EE;
+  --color-overlay: rgba(7, 7, 12, 0.72);
+
+  --font-display: "Space Grotesk", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-body: "Pretendard", "Noto Sans KR", "Inter", sans-serif;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(242, 65, 143, 0.16), transparent 32rem),
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 28rem),
+    #07070C;
+  color: #F7F3FF;
+  font-family: "Pretendard", "Noto Sans KR", "Inter", sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*:focus-visible {
+  outline: 2px solid #22D3EE;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

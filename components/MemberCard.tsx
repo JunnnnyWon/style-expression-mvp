@@ -1,0 +1,92 @@
+"use client";
+
+import { Member } from "@/data/members";
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Info } from "lucide-react";
+import Badge from "./Badge";
+
+const memberTones: Record<string, { gradient: string; accent: string }> = {
+  A: { gradient: "from-amber-950/60 to-black/80", accent: "text-amber-300" },
+  B: { gradient: "from-violet-950/60 to-black/80", accent: "text-violet-300" },
+  C: { gradient: "from-red-950/60 to-black/80", accent: "text-red-300" },
+  D: { gradient: "from-slate-950/60 to-black/80", accent: "text-slate-300" },
+  E: { gradient: "from-stone-950/60 to-black/80", accent: "text-stone-300" },
+};
+
+export default function MemberCard({
+  member,
+  onDetail,
+}: {
+  member: Member;
+  onDetail?: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  const tone = memberTones[member.id] ?? memberTones.A;
+
+  return (
+    <div
+      className="bg-surface border border-border rounded-xl overflow-hidden hover:border-border-strong transition-colors cursor-pointer group"
+      onClick={() => setExpanded(!expanded)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpanded(!expanded); } }}
+    >
+      <div className="aspect-[3/4] bg-surface-elevated overflow-hidden relative">
+        {imgError ? (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-surface-soft to-surface">
+            <div className="text-center p-4">
+              <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 border border-border flex items-center justify-center text-2xl font-bold text-text-muted">
+                {member.name[0]}
+              </div>
+              <p className="text-xs text-text-muted mt-2">이미지 없음</p>
+            </div>
+          </div>
+        ) : (
+          <img
+            src={member.imageUrl}
+            alt={`${member.name} — ${member.role}`}
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
+        )}
+        <div className={`absolute inset-0 bg-gradient-to-t ${tone.gradient}`} />
+        <div className="absolute top-2 left-2">
+          <Badge variant="primary">{member.id}</Badge>
+        </div>
+        {onDetail && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onDetail(); }}
+            className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white/70 hover:text-white transition-colors"
+            aria-label="상세 정보"
+          >
+            <Info size={14} />
+          </button>
+        )}
+        <div className="absolute bottom-3 left-3 right-3 space-y-1">
+          <h3 className="text-lg font-bold text-white drop-shadow-lg">{member.name}</h3>
+          <p className={`text-xs font-medium ${tone.accent} drop-shadow`}>{member.role}</p>
+        </div>
+      </div>
+      <div className="px-3 py-3 space-y-2">
+        <div className="flex flex-wrap gap-1">
+          {[member.archetype, ...member.visualSummary.split(", ").slice(0, 2)].map((kw, i) => (
+            <span key={i} className="text-[0.65rem] px-2 py-0.5 bg-surface-elevated text-text-muted rounded-full">
+              {kw}
+            </span>
+          ))}
+        </div>
+        {expanded && (
+          <div className="pt-2 space-y-2 text-sm text-text-secondary border-t border-border">
+            <p>{member.personality}</p>
+            <p className="text-warning/80 text-xs">{member.trigger}</p>
+          </div>
+        )}
+        <div className="flex justify-center pt-0.5">
+          {expanded ? <ChevronUp size={14} className="text-text-muted" /> : <ChevronDown size={14} className="text-text-muted" />}
+        </div>
+      </div>
+    </div>
+  );
+}
