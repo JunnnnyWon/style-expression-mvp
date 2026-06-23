@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 export default function LandingPage() {
   const router = useRouter();
   const [hasSave, setHasSave] = useState(false);
+  const [posterError, setPosterError] = useState(false);
 
   useEffect(() => {
     setHasSave(!!loadGame());
@@ -63,21 +64,19 @@ export default function LandingPage() {
         </div>
 
         <div className="flex-1 w-full max-w-md lg:max-w-none">
-          <div className="aspect-[16/9] bg-surface-elevated border border-border rounded-xl overflow-hidden flex items-center justify-center">
-            <div className="text-center p-6">
-              <div className="w-full h-full min-h-[200px] rounded-xl bg-gradient-to-br from-card-gradient-start via-surface-soft to-card-gradient-end border border-border flex items-center justify-center">
-                <div className="space-y-3 text-center">
-                  <div className="flex justify-center gap-3">
-                    {["A", "B", "C", "D", "E"].map((id) => (
-                      <div key={id} className="w-12 h-16 rounded-lg bg-surface-elevated border border-border flex items-center justify-center text-label-caps text-text-muted">
-                        {id}
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-body-sm text-text-muted">단체 포스터 준비 중</p>
-                </div>
+          <div className="aspect-[16/9] bg-surface-elevated border border-border rounded-xl overflow-hidden">
+            {!posterError ? (
+              <img
+                src="/posters/main-poster.webp"
+                alt="Dopamine Diva 단체 포스터"
+                className="w-full h-full object-cover"
+                onError={() => setPosterError(true)}
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-card-gradient-start via-surface-soft to-card-gradient-end">
+                <p className="text-body-sm text-text-muted">포스터 로딩 실패</p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
